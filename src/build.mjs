@@ -311,22 +311,24 @@ function hero(data) {
 }
 
 function finalCta(data) {
+  const phone = `<bdi dir="ltr">${esc(site.phoneDisplay)}</bdi>`;
   return `<section class="final-cta" aria-labelledby="contact-title">
       <div class="section-inner">
         <div>
           <h2 id="contact-title">${esc(data.finalTitle)}</h2>
           <p>${esc(data.finalIntro)}</p>
         </div>
-        <a class="button button-secondary" href="${attr(whatsappUrl(data.quoteMessage))}" target="_blank" rel="noopener">${esc(data.lang.common.whatsappLabel)} ${esc(site.phoneDisplay)}</a>
+        <a class="button button-secondary" href="${attr(whatsappUrl(data.quoteMessage))}" target="_blank" rel="noopener">${esc(data.lang.common.whatsappLabel)} ${phone}</a>
       </div>
     </section>`;
 }
 
 function footer(data) {
+  const phone = `<bdi dir="ltr">${esc(site.phoneDisplay)}</bdi>`;
   return `<footer class="site-footer">
     <div class="footer-inner">
       <span>${esc(data.lang.footerBrand)}</span>
-      <span>${esc(data.lang.common.whatsappLabel)}: ${esc(site.phoneDisplay)}</span>
+      <span>${esc(data.lang.common.whatsappLabel)}: ${phone}</span>
     </div>
   </footer>
   <a class="whatsapp-float" href="${attr(whatsappUrl(data.quoteMessage))}" target="_blank" rel="noopener" aria-label="${attr(data.lang.common.chatAria)}">
