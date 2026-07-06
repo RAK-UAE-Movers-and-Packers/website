@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rak-uae-movers-and-packers.github.io/sitemap.xml

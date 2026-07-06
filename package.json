@@ -1,0 +1,10 @@
+{
+  "name": "rak-uae-movers-and-packers-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "validate": "npm run build && npx --yes html-validate \"**/*.html\""
+  }
+}
