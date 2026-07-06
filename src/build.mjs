@@ -5,6 +5,12 @@ import { areas, languages, site } from "./site.config.mjs";
 const outDir = process.cwd();
 const langCodes = Object.keys(languages);
 const now = new Date().toISOString().slice(0, 10);
+const languageFlags = {
+  en: "flag-gb.png",
+  ar: "flag-ae.png",
+  ru: "flag-ru.png",
+  hi: "flag-in.png"
+};
 
 function esc(value) {
   return String(value)
@@ -189,8 +195,13 @@ function header(data) {
   const switcher = langCodes.map((code) => {
     const targetPageKey = data.pageKey === "root" ? "home" : data.pageKey;
     const href = pathFor(code, targetPageKey, data.area?.slug);
-    const selected = code === lang.code ? " selected" : "";
-    return `<option value="${attr(href)}"${selected}>${esc(languages[code].label)}</option>`;
+    const current = code === lang.code ? ' aria-current="page"' : "";
+    return `<li>
+            <a href="${attr(href)}"${current}>
+              <img src="/assets/icons/${attr(languageFlags[code])}" alt="" loading="lazy">
+              <span>${esc(languages[code].label)}</span>
+            </a>
+          </li>`;
   }).join("");
   return `<header class="site-header">
     <nav class="nav" aria-label="${attr(lang.common.mainNavigation)}">
@@ -204,18 +215,14 @@ function header(data) {
         <a href="#faq">${esc(lang.nav.faq)}</a>
         <a class="button button-primary nav-quote" href="${attr(whatsappUrl(data.quoteMessage))}" target="_blank" rel="noopener">${esc(lang.nav.quote)}</a>
       </div>
-      <label class="language-switcher">
-        <span class="sr-only">${esc(lang.common.languageLabel)}</span>
-        <svg class="language-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="9"></circle>
-          <path d="M3 12h18"></path>
-          <path d="M12 3a14 14 0 0 1 0 18"></path>
-          <path d="M12 3a14 14 0 0 0 0 18"></path>
-        </svg>
-        <select aria-label="${attr(lang.common.languageLabel)}" data-language-switcher>
-          ${switcher}
-        </select>
-      </label>
+      <details class="language-switcher">
+        <summary>
+          <img class="language-icon" src="/assets/icons/globe.png" alt="" aria-hidden="true">
+          <span class="sr-only">${esc(lang.common.languageLabel)}: </span>
+          <span>${esc(lang.label)}</span>
+        </summary>
+        <ul>${switcher}</ul>
+      </details>
     </nav>
   </header>`;
 }
@@ -365,13 +372,6 @@ ${head(data)}
     ${finalCta(data)}
   </main>
   ${footer(data)}
-  <script>
-    document.querySelectorAll("[data-language-switcher]").forEach(function (select) {
-      select.addEventListener("change", function () {
-        window.location.href = select.value;
-      });
-    });
-  </script>
 </body>
 </html>
 `;
