@@ -29,17 +29,21 @@ function absolute(pathname) {
 
 function pathFor(lang, pageKey, areaSlug = "") {
   if (pageKey === "home") return `/${lang}/`;
+  if (pageKey === "root") return "/";
   return `/${lang}/${areaSlug}/`;
 }
 
 function alternates(pageKey, areaSlug = "") {
+  const alternatePageKey = pageKey === "root" ? "home" : pageKey;
   const links = langCodes.map((lang) => ({
     lang: languages[lang].hreflang,
-    href: absolute(pathFor(lang, pageKey, areaSlug))
+    href: absolute(pathFor(lang, alternatePageKey, areaSlug))
   }));
   links.push({
     lang: "x-default",
-    href: absolute(pathFor("en", pageKey, areaSlug))
+    href: pageKey === "home" || pageKey === "root"
+      ? absolute("/")
+      : absolute(pathFor("en", pageKey, areaSlug))
   });
   return links;
 }
@@ -68,6 +72,28 @@ function pageData(langCode, pageKey, area = null) {
       finalTitle: lang.home.finalTitle,
       finalIntro: lang.home.finalIntro,
       canonicalPath: pathFor(langCode, pageKey),
+      quoteMessage: "Hello, I need packing and moving help in Ras Al Khaimah."
+    };
+  }
+
+  if (pageKey === "root") {
+    return {
+      pageKey,
+      lang,
+      area,
+      title: lang.home.title,
+      description: lang.home.description,
+      h1: lang.home.h1,
+      intro: lang.home.intro,
+      highlights: lang.home.highlights,
+      servicesTitle: lang.home.servicesTitle,
+      servicesIntro: lang.home.servicesIntro,
+      localTitle: lang.home.whyTitle,
+      localIntro: lang.home.whyIntro,
+      checks: lang.home.checks,
+      finalTitle: lang.home.finalTitle,
+      finalIntro: lang.home.finalIntro,
+      canonicalPath: "/",
       quoteMessage: "Hello, I need packing and moving help in Ras Al Khaimah."
     };
   }
@@ -150,7 +176,8 @@ ${altLinks}
 function header(data) {
   const lang = data.lang;
   const switcher = langCodes.map((code) => {
-    const href = pathFor(code, data.pageKey, data.area?.slug);
+    const targetPageKey = data.pageKey === "root" ? "home" : data.pageKey;
+    const href = pathFor(code, targetPageKey, data.area?.slug);
     const active = code === lang.code ? ' aria-current="page"' : "";
     return `<a href="${href}"${active}>${esc(languages[code].shortLabel)}</a>`;
   }).join("");
@@ -320,46 +347,12 @@ ${head(data)}
 `;
 }
 
-function renderGateway() {
-  const cards = langCodes.map((code) => {
-    const lang = languages[code];
-    return `<a class="gateway-card" href="/${code}/" lang="${attr(lang.locale)}" dir="${attr(lang.dir)}">
-          <strong>${esc(lang.label)}</strong>
-          <span>${esc(lang.home.h1)}</span>
-        </a>`;
-  }).join("");
-  const links = langCodes.map((code) => `  <link rel="alternate" hreflang="${languages[code].hreflang}" href="${absolute(`/${code}/`)}">`).join("\n");
-  return `<!DOCTYPE html>
-<html lang="en-AE">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(site.businessName)}</title>
-  <meta name="description" content="${attr(`Choose your language for ${site.businessName} in Ras Al Khaimah.`)}">
-  <link rel="canonical" href="${site.baseUrl}/">
-${links}
-  <link rel="alternate" hreflang="x-default" href="${site.baseUrl}/">
-  <link rel="stylesheet" href="/assets/styles.css">
-</head>
-<body>
-  <main class="gateway">
-    <section class="gateway-inner">
-      <p class="eyebrow">Ras Al Khaimah movers</p>
-      <h1>${esc(site.businessName)}</h1>
-      <p>Choose your language to continue.</p>
-      <div class="gateway-grid">${cards}</div>
-    </section>
-  </main>
-</body>
-</html>
-`;
-}
-
 function sitemap() {
-  const pages = [{ pageKey: "home" }, ...areas.map((area) => ({ pageKey: "area", area }))];
+  const pages = [{ pageKey: "root" }, { pageKey: "home" }, ...areas.map((area) => ({ pageKey: "area", area }))];
   const entries = [];
   for (const page of pages) {
-    for (const lang of langCodes) {
+    const pageLangs = page.pageKey === "root" ? ["en"] : langCodes;
+    for (const lang of pageLangs) {
       const path = pathFor(lang, page.pageKey, page.area?.slug);
       const altLinks = alternates(page.pageKey, page.area?.slug)
         .map((item) => `    <xhtml:link rel="alternate" hreflang="${item.lang}" href="${item.href}" />`)
@@ -389,7 +382,7 @@ async function main() {
     await rm(join(outDir, code), { recursive: true, force: true });
   }
 
-  await write("index.html", renderGateway());
+  await write("index.html", renderPage(pageData("en", "root")));
   await write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
   await write(".nojekyll", "");
   await write("sitemap.xml", sitemap());
