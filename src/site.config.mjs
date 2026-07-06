@@ -1,6 +1,6 @@
 export const site = {
   baseUrl: "https://rak-uae-movers-and-packers.github.io",
-  businessName: "Al Hamra & Mina Al Arab Movers and Packers",
+  businessName: "RAK UAE Movers and Packers",
   phoneDisplay: "+971 55 145 7235",
   phoneHref: "+971551457235",
   whatsappNumber: "971551457235",
@@ -23,8 +23,8 @@ export const languages = {
     dir: "ltr",
     locale: "en",
     hreflang: "en-AE",
-    brand: "Al Hamra & Mina Al Arab Movers and Packers | Ras Al Khaimah, UAE",
-    footerBrand: "Al Hamra & Mina Al Arab Movers and Packers | Ras Al Khaimah, UAE",
+    brand: "RAK UAE Movers and Packers | Ras Al Khaimah, UAE",
+    footerBrand: "RAK UAE Movers and Packers | Ras Al Khaimah, UAE",
     keywords: "movers and packers Ras Al Khaimah, Al Hamra movers, Mina Al Arab movers, home moving Ras Al Khaimah, packing services Ras Al Khaimah, villa movers UAE",
     areaKeywords: "{area} movers and packers, {area} home movers, {area} packing services, Ras Al Khaimah movers",
     schemaServiceType: ["Home moving", "Apartment moving", "Villa moving", "Packing services", "Furniture handling"],
@@ -51,9 +51,9 @@ export const languages = {
       chatAria: "Chat on WhatsApp"
     },
     home: {
-      title: "Al Hamra & Mina Al Arab Movers and Packers | Ras Al Khaimah",
+      title: "RAK UAE Movers and Packers | Ras Al Khaimah",
       description: "Reliable movers and packers in Ras Al Khaimah for apartments, villas and home moves in Al Hamra, Mina Al Arab and nearby areas. Packing, furniture handling and WhatsApp quotes.",
-      h1: "Al Hamra & Mina Al Arab movers and packers",
+      h1: "RAK UAE Movers and Packers",
       intro: "Experienced movers and packers for house, apartment and villa moves in Ras Al Khaimah. We pack your belongings carefully, move them safely and help make moving day simpler.",
       highlights: [
         ["Careful packing", "Boxes, wrapping and organized handling for household items."],
@@ -74,7 +74,7 @@ export const languages = {
       faqTitle: "Questions customers ask before moving",
       faqIntro: "These details help create a better moving quote and a smoother day.",
       finalTitle: "Ready to move in Ras Al Khaimah?",
-      finalIntro: "Message Al Hamra & Mina Al Arab movers and packers on WhatsApp for packing help, home moving and careful furniture handling."
+      finalIntro: "Message RAK UAE Movers and Packers on WhatsApp for packing help, home moving and careful furniture handling."
     },
     areaTemplate: {
       title: "{area} Movers and Packers | Ras Al Khaimah",
