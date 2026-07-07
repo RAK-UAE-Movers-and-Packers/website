@@ -1,5 +1,5 @@
 export const site = {
-  baseUrl: "https://rak-uae-movers-and-packers.github.io",
+  baseUrl: "https://rak-uae-movers-and-packers.pages.dev",
   businessName: "RAK UAE Movers and Packers",
   phoneDisplay: "+971 55 145 7235",
   phoneHref: "+971551457235",

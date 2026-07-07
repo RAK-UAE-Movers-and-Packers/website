@@ -1,8 +1,9 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { areas, languages, site } from "./site.config.mjs";
 
-const outDir = process.cwd();
+const rootDir = process.cwd();
+const outDir = join(rootDir, "dist", "site");
 const langCodes = Object.keys(languages);
 const now = new Date().toISOString().slice(0, 10);
 const languageFlags = {
@@ -408,9 +409,9 @@ async function write(pathname, content) {
 }
 
 async function main() {
-  for (const code of langCodes) {
-    await rm(join(outDir, code), { recursive: true, force: true });
-  }
+  await rm(outDir, { recursive: true, force: true });
+  await mkdir(outDir, { recursive: true });
+  await cp(join(rootDir, "assets"), join(outDir, "assets"), { recursive: true });
 
   await write("index.html", renderPage(pageData("en", "root")));
   await write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${site.baseUrl}/sitemap.xml\n`);

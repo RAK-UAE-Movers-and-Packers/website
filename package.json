@@ -5,6 +5,6 @@
   "type": "module",
   "scripts": {
     "build": "node src/build.mjs",
-    "validate": "npm run build && npx --yes html-validate \"**/*.html\""
+    "validate": "npm run build && npx --yes html-validate \"dist/site/**/*.html\""
   }
 }
