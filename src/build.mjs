@@ -157,6 +157,7 @@ function head(data) {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
     name: data.lang.brand,
+    legalName: site.legalName,
     description: data.description,
     telephone: site.phoneHref,
     url: absolute(data.canonicalPath),
@@ -166,7 +167,25 @@ function head(data) {
       : areas.map((area) => area.name[data.lang.code] || area.name.en).concat([data.lang.common.footerArea]),
     priceRange: "$$",
     sameAs: whatsappUrl(data.quoteMessage),
-    serviceType: data.lang.schemaServiceType
+    serviceType: data.lang.schemaServiceType,
+    identifier: [
+      {
+        "@type": "PropertyValue",
+        name: data.lang.legal.commercialLicence,
+        value: site.commercialLicenceNumber,
+        propertyID: site.licensingAuthority
+      },
+      {
+        "@type": "PropertyValue",
+        name: data.lang.legal.chamberMembership,
+        value: site.chamberMembershipNumber
+      },
+      {
+        "@type": "PropertyValue",
+        name: data.lang.legal.localRegistry,
+        value: site.localRegistryNumber
+      }
+    ]
   };
 
   return `  <meta charset="UTF-8">
@@ -313,12 +332,17 @@ function hero(data) {
               <span>${esc(point[1])}</span>
             </li>`).join("");
   const callLabel = esc(data.lang.common.call).replaceAll(" ", "&nbsp;");
+  const licenceNumber = `<bdi dir="ltr">${esc(site.commercialLicenceNumber)}</bdi>`;
   return `<section class="hero" aria-labelledby="hero-title">
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">${esc(data.lang.common.eyebrow)}</p>
           <h1 id="hero-title">${esc(data.h1)}</h1>
           <p>${esc(data.intro)}</p>
+          <div class="licence-badge">
+            <span>${esc(data.lang.legal.trust)}</span>
+            <strong>${esc(data.lang.legal.commercialLicence)}: ${licenceNumber}</strong>
+          </div>
           <div class="hero-actions" role="group" aria-label="${attr(data.lang.common.contactOptions)}">
             <a class="button button-primary" href="${attr(whatsappUrl(data.quoteMessage))}" target="_blank" rel="noopener">${esc(data.lang.common.whatsapp)}</a>
             <a class="button button-secondary" href="tel:${attr(site.phoneHref)}">${callLabel}</a>
@@ -344,10 +368,27 @@ function finalCta(data) {
 
 function footer(data) {
   const phone = `<bdi dir="ltr">${esc(site.phoneDisplay)}</bdi>`;
+  const companyDetails = [
+    [data.lang.legal.legalName, site.legalName, true],
+    [data.lang.legal.commercialLicence, site.commercialLicenceNumber, true],
+    [data.lang.legal.chamberMembership, site.chamberMembershipNumber, true],
+    [data.lang.legal.localRegistry, site.localRegistryNumber, true],
+    [data.lang.legal.licensingAuthority, data.lang.legal.licensingAuthorityValue, false],
+    [data.lang.legal.licensingJurisdiction, data.lang.common.footerArea, false]
+  ].map(([label, value, ltr]) => `<div>
+          <dt>${esc(label)}</dt>
+          <dd>${ltr ? `<bdi dir="ltr">${esc(value)}</bdi>` : esc(value)}</dd>
+        </div>`).join("");
   return `<footer class="site-footer">
     <div class="footer-inner">
-      <span>${esc(data.lang.footerBrand)}</span>
-      <span>${esc(data.lang.common.whatsappLabel)}: ${phone}</span>
+      <div class="footer-summary">
+        <strong>${esc(data.lang.footerBrand)}</strong>
+        <span>${esc(data.lang.common.whatsappLabel)}: ${phone}</span>
+      </div>
+      <section class="company-details" aria-labelledby="company-details-title">
+        <h2 id="company-details-title">${esc(data.lang.legal.companyDetails)}</h2>
+        <dl>${companyDetails}</dl>
+      </section>
     </div>
   </footer>
   <a class="whatsapp-float" href="${attr(whatsappUrl(data.quoteMessage))}" target="_blank" rel="noopener" aria-label="${attr(data.lang.common.chatAria)}">

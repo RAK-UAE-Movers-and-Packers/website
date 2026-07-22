@@ -1,6 +1,11 @@
 export const site = {
   baseUrl: "https://rak-uae-movers-and-packers.pages.dev",
   businessName: "RAK UAE Movers and Packers",
+  legalName: "SKY TRANSPORT LLC",
+  commercialLicenceNumber: "29518",
+  licensingAuthority: "RAK DED (Ras Al Khaimah Department of Economic Development)",
+  chamberMembershipNumber: "H-32454-2008",
+  localRegistryNumber: "31341",
   phoneDisplay: "+971 55 145 7235",
   phoneHref: "+971551457235",
   whatsappNumber: "971551457235",
@@ -49,6 +54,17 @@ export const languages = {
       mainNavigation: "Main navigation",
       contactOptions: "Contact options",
       chatAria: "Chat on WhatsApp"
+    },
+    legal: {
+      trust: "UAE-registered company, licensed in Ras Al Khaimah",
+      companyDetails: "Company and licence details",
+      legalName: "Legal name",
+      commercialLicence: "Commercial licence no.",
+      chamberMembership: "Chamber of Commerce membership no.",
+      localRegistry: "Local registry no.",
+      licensingAuthority: "Licensing authority",
+      licensingAuthorityValue: "RAK DED (Ras Al Khaimah Department of Economic Development)",
+      licensingJurisdiction: "Licensing jurisdiction"
     },
     home: {
       title: "RAK UAE Movers and Packers | Ras Al Khaimah",
@@ -145,6 +161,17 @@ export const languages = {
       contactOptions: "خيارات التواصل",
       chatAria: "محادثة عبر واتساب"
     },
+    legal: {
+      trust: "شركة مسجلة في دولة الإمارات ومرخصة في رأس الخيمة",
+      companyDetails: "بيانات الشركة والترخيص",
+      legalName: "الاسم القانوني",
+      commercialLicence: "رقم الرخصة التجارية",
+      chamberMembership: "رقم عضوية غرفة التجارة",
+      localRegistry: "رقم السجل المحلي",
+      licensingAuthority: "جهة الترخيص",
+      licensingAuthorityValue: "دائرة التنمية الاقتصادية في رأس الخيمة (RAK DED)",
+      licensingJurisdiction: "نطاق الترخيص"
+    },
     home: {
       title: "نقل وتغليف العفش في الحمراء وميناء العرب | رأس الخيمة",
       description: "خدمات نقل وتغليف العفش في رأس الخيمة للحمراء وميناء العرب والمناطق القريبة. تغليف، تحميل، نقل، تعامل آمن مع الأثاث وعرض سعر عبر واتساب.",
@@ -240,6 +267,17 @@ export const languages = {
       contactOptions: "Варианты связи",
       chatAria: "Чат в WhatsApp"
     },
+    legal: {
+      trust: "Компания зарегистрирована в ОАЭ и лицензирована в Рас-эль-Хайме",
+      companyDetails: "Сведения о компании и лицензии",
+      legalName: "Юридическое наименование",
+      commercialLicence: "Коммерческая лицензия №",
+      chamberMembership: "Членство в Торгово-промышленной палате №",
+      localRegistry: "Местный реестр №",
+      licensingAuthority: "Лицензирующий орган",
+      licensingAuthorityValue: "RAK DED (Департамент экономического развития Рас-эль-Хаймы)",
+      licensingJurisdiction: "Юрисдикция лицензии"
+    },
     home: {
       title: "Переезды и упаковка в Аль-Хамра и Мина-эль-Араб | Рас-эль-Хайма",
       description: "Переезды и упаковка вещей в Рас-эль-Хайме: Аль-Хамра, Мина-эль-Араб и соседние районы. Упаковка, мебель, погрузка, перевозка и расчёт в WhatsApp.",
@@ -334,6 +372,17 @@ export const languages = {
       mainNavigation: "मुख्य नेविगेशन",
       contactOptions: "संपर्क विकल्प",
       chatAria: "व्हाट्सऐप चैट"
+    },
+    legal: {
+      trust: "यूएई में पंजीकृत और रास अल खैमाह में लाइसेंस प्राप्त कंपनी",
+      companyDetails: "कंपनी और लाइसेंस की जानकारी",
+      legalName: "कानूनी नाम",
+      commercialLicence: "वाणिज्यिक लाइसेंस संख्या",
+      chamberMembership: "चैंबर ऑफ कॉमर्स सदस्यता संख्या",
+      localRegistry: "स्थानीय रजिस्ट्री संख्या",
+      licensingAuthority: "लाइसेंसिंग प्राधिकरण",
+      licensingAuthorityValue: "RAK DED (रास अल खैमाह आर्थिक विकास विभाग)",
+      licensingJurisdiction: "लाइसेंस क्षेत्र"
     },
     home: {
       title: "अल हमरा और मीना अल अरब पैकिंग और शिफ्टिंग सेवा | रास अल खैमाह",
